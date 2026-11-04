@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 const os = require('os')
 const shellies = require('shellies')
 const should = require('should')

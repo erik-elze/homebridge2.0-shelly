@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 const Homebridge = require('./mocks/homebridge')
 
 const homebridge = new Homebridge()
@@ -21,6 +19,20 @@ describe('ConsumptionCharacteristic', function() {
       char.props.should.be.ok()
       char.props.format.should.be.ok()
       char.props.perms.should.be.ok()
+    })
+
+    it('uses PAIRED_READ when supplied by current HAP-NodeJS', function() {
+      const currentHomebridge = new Homebridge()
+      currentHomebridge.hap.Perms = {
+        PAIRED_READ: 'pr',
+        NOTIFY: 'ev',
+      }
+      const { ConsumptionCharacteristic: CurrentConsumptionCharacteristic } =
+        require('../util/custom-characteristics')(currentHomebridge)
+
+      const char = new CurrentConsumptionCharacteristic()
+      char.props.perms.should.deepEqual(['pr', 'ev'])
+      char.props.perms.should.not.containEql(null)
     })
   })
 })

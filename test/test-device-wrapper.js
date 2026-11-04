@@ -1,5 +1,3 @@
-/* eslint-env mocha */
-
 const shellies = require('shellies')
 const sinon = require('sinon')
 

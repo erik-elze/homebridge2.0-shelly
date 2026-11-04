@@ -4,6 +4,10 @@ module.exports = homebridge => {
 
   const Formats = homebridge.hap.Formats || Characteristic.Formats
   const Perms = homebridge.hap.Perms || Characteristic.Perms
+  // HAP-NodeJS 1.0 renamed READ to PAIRED_READ.  Retain the old spelling as a
+  // fallback so the plugin can still run with the Homebridge versions it
+  // previously supported.
+  const pairedRead = Perms.PAIRED_READ || Perms.READ
 
   class ConsumptionCharacteristic extends Characteristic {
     constructor() {
@@ -14,7 +18,7 @@ module.exports = homebridge => {
         minValue: 0,
         maxValue: 65535,
         minStep: 0.1,
-        perms: [Perms.READ, Perms.NOTIFY],
+        perms: [pairedRead, Perms.NOTIFY],
       })
       this.value = this.getDefaultValue()
     }
@@ -27,7 +31,7 @@ module.exports = homebridge => {
       this.setProps({
         format: Formats.FLOAT,
         unit: 'A',
-        perms: [Perms.READ, Perms.NOTIFY],
+        perms: [pairedRead, Perms.NOTIFY],
       })
       this.value = this.getDefaultValue()
     }
@@ -40,7 +44,7 @@ module.exports = homebridge => {
       this.setProps({
         format: Formats.FLOAT,
         unit: 'V',
-        perms: [Perms.READ, Perms.NOTIFY],
+        perms: [pairedRead, Perms.NOTIFY],
       })
       this.value = this.getDefaultValue()
     }

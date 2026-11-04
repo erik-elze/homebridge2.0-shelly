@@ -1,5 +1,3 @@
-/* eslint-env browser,jquery */
-
 function loadDevices() {
   const list = $('#devices-list').empty()
 

@@ -1,5 +1,14 @@
 # Changelog
 
+## Next
+
+* Fix custom power-meter characteristics for current HAP-NodeJS versions by
+  using the `PAIRED_READ` permission (with a compatibility fallback for older
+  Homebridge releases). This prevents accessories from being excluded because
+  of an invalid `null` permission.
+* Replace the obsolete ESLint 8 / StandardJS setup with ESLint 10 and the
+  ESLint-10-compatible `neostandard` configuration.
+
 ## 0.20.1
 
 * Removed the optional CLI binary from the npm package to avoid Synology DSM
