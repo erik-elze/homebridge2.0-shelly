@@ -1,7 +1,7 @@
 {
   "name": "homebridge-2-0-shelly",
   "displayName": "homebridge2.0-shelly",
-  "version": "0.20.1",
+  "version": "0.20.4",
   "description": "Homebridge 2.0 compatibility fork of homebridge-shelly",
   "main": "index.js",
   "scripts": {
@@ -21,7 +21,7 @@
     "homebridge-2-0"
   ],
   "engines": {
-    "node": "^22.12.0 || ^24.0.0",
+    "node": "^22.12.0 || ^24.0.0 || ^26.0.0",
     "homebridge": "^1.6.0 || ^2.0.0"
   },
   "author": "Alexander Rydén",

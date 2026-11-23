@@ -45,6 +45,30 @@ module.exports = homebridge => {
       return this.device[this._voltageProperty]
     }
 
+    setup(accessory) {
+      super.setup(accessory)
+
+      // Platform accessories persist services and characteristics between
+      // Homebridge restarts. Repair cached characteristics that were created
+      // with the obsolete READ permission before HAP validates the accessory.
+      this._repairCachedCharacteristic(ConsumptionCharacteristic)
+
+      if (this._electricCurrentProperty) {
+        this._repairCachedCharacteristic(ElectricCurrentCharacteristic)
+      }
+
+      if (this._voltageProperty) {
+        this._repairCachedCharacteristic(VoltageCharacteristic)
+      }
+    }
+
+    _repairCachedCharacteristic(CharacteristicType) {
+      const props = new CharacteristicType().props
+      this.service
+        .getCharacteristic(CharacteristicType)
+        .setProps(props)
+    }
+
     _createService() {
       const service = new PowerMeterService()
         .setCharacteristic(ConsumptionCharacteristic, this.consumption)

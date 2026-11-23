@@ -34,5 +34,17 @@ describe('ConsumptionCharacteristic', function() {
       char.props.perms.should.deepEqual(['pr', 'ev'])
       char.props.perms.should.not.containEql(null)
     })
+
+    it('falls back to HAP paired-read when permissions are absent', function() {
+      const currentHomebridge = new Homebridge()
+      currentHomebridge.hap.Perms = {
+        NOTIFY: 'ev',
+      }
+      const { ConsumptionCharacteristic: CurrentConsumptionCharacteristic } =
+        require('../util/custom-characteristics')(currentHomebridge)
+
+      const char = new CurrentConsumptionCharacteristic()
+      char.props.perms.should.deepEqual(['pr', 'ev'])
+    })
   })
 })

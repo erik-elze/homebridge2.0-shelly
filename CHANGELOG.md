@@ -8,6 +8,10 @@
   of an invalid `null` permission.
 * Replace the obsolete ESLint 8 / StandardJS setup with ESLint 10 and the
   ESLint-10-compatible `neostandard` configuration.
+* Add a HAP-standard `pr` fallback for Homebridge releases that no longer
+  expose permission constants through the plugin API.
+* Repair invalid power-meter characteristic permissions from cached platform
+  accessories during startup.
 
 ## 0.20.1
 

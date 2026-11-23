@@ -7,7 +7,9 @@ module.exports = homebridge => {
   // HAP-NodeJS 1.0 renamed READ to PAIRED_READ.  Retain the old spelling as a
   // fallback so the plugin can still run with the Homebridge versions it
   // previously supported.
-  const pairedRead = Perms.PAIRED_READ || Perms.READ
+  // Some current Homebridge releases no longer expose the permission constants
+  // through the plugin API. `pr` is HAP's standardized paired-read value.
+  const pairedRead = Perms.PAIRED_READ || Perms.READ || 'pr'
 
   class ConsumptionCharacteristic extends Characteristic {
     constructor() {
